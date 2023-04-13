@@ -34,9 +34,11 @@ const Navbar = ({theme = false, toggleTheme}) => {
             onClose={handleClose}
           >
             {navItems.map((item) => (
-              <MenuItem onClick={handleClose} key={item}>
-                <Link to={`/${item}`}>{item}</Link>
+              <Link key={item} to={`/${item}`}>
+              <MenuItem onClick={handleClose} >
+                {item}
               </MenuItem>
+              </Link>
             ))}
           </Menu>
           <Typography
