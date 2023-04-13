@@ -3,7 +3,7 @@ import { Box, Card, CardMedia, Paper, Typography } from '@mui/material'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const PokeCard = ({imgUrl, name, base_experience, height, weight}) => {
+const PokeCard = ({imgSrc, name, base_experience, height, weight}) => {
   const navigate = useNavigate()
 
   const styles = {
@@ -37,7 +37,7 @@ const PokeCard = ({imgUrl, name, base_experience, height, weight}) => {
     <Paper sx={styles.paper}>
         <ArrowBack sx={styles.goBack} onClick={() => navigate(-1)}/>
         <Box>
-            <CardMedia image={imgUrl} title={name} sx={styles.img}/>
+            <CardMedia image={imgSrc} title={name} sx={styles.img}/>
             <Typography variant='h3'>{name}</Typography>
         </Box>
         <Box ml={4}>

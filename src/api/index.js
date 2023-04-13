@@ -3,7 +3,7 @@ import axios from './axios';
 
 
 // Pokemon
-const fetchPokemons = async (offset = 9, limit = 9, type = 'normal') => {
+const fetchPokemons = async (offset = 9, limit = 9, type = 'all') => {
     try {
       if(type === 'all'){
         const {data} = await axios.get(`/pokemon?limit=${limit}&offset=${offset}`)
@@ -16,7 +16,7 @@ const fetchPokemons = async (offset = 9, limit = 9, type = 'normal') => {
 
         const filteredArr = data.pokemon.filter((_, idx) => start <= idx && idx < end)
         const results = filteredArr.map(({pokemon}) => ({name: pokemon.name})) 
-        console.log(data)
+        
         return {results, count: data.pokemon.length}       
       }
         
@@ -28,8 +28,11 @@ const fetchPokemons = async (offset = 9, limit = 9, type = 'normal') => {
 const fetchPokemon = async (name) => {
     try {
       const { data } = await axios(`/pokemon/${name}`);
-      const imgUrl = data.sprites.other.dream_world.front_default;
-      return { ...data, imgUrl }
+      const imgUrl = Object.values(data.sprites.other)[2].front_default;
+      
+      const imgSrc = Object.values(data.sprites.other)[2].front_shiny;
+      console.log(data.sprites.other)
+      return { ...data, imgUrl, imgSrc }
     } catch (error) {
       console.log(error + "Failed to fetch pokemon:", error);
     }
